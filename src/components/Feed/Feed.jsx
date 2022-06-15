@@ -1,13 +1,19 @@
 import * as React from "react"
 import Tweet from "../Tweet/Tweet"
-import TweetBox from "../TweetBox/TweetBox"
+import TweetBox, { TweetSubmitButton } from "../TweetBox/TweetBox"
 import "./Feed.css"
 
-export default function Feed(props) {
+export default function Feed({setTweets, userProfile, tweetText = "", setTweetText, tweets }) {
   return (
     <div className="col feed">
       {/* UPDATE TWEET BOX PROPS HERE */}
-      <TweetBox />
+      <TweetBox 
+      tweets={tweets}
+      userProfile={userProfile}
+      setTweets={setTweets}
+      tweetText={tweetText}
+      setTweetText={setTweetText}
+      />
 
       <div className="see-new-tweets beet">
         <p>
@@ -15,7 +21,15 @@ export default function Feed(props) {
         </p>
       </div>
 
-      <div className="twitter-feed">{/* ADD CODE HERE */}</div>
+      <div className="twitter-feed">
+      {tweets.map((tweet) => (
+          <Tweet
+          tweet={tweet}
+          key={tweet.id}
+          />
+        ))}
+        
+        </div>
     </div>
   )
 }
